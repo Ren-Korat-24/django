@@ -1,1 +1,3 @@
 Pratice repo
+license
+mit
