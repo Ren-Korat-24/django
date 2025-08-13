@@ -8,31 +8,25 @@ def yom_html(req):
 def home_html(req):
     return render(req, "home.html")
 
-
 def pages_html(req):
     if req.method == "POST":
-        rollno = req.POST.get("rollno")
-        name = req.POST.get("name")
-        hindi = req.POST.get("hindi")
-        gujarati = req.POST.get("gujarati")
-        ss = req.POST.get("ss")
-        total = req.POST.get("total")
-        minmarks = req.POST.get("minmarks")
-        maxmarks = req.POST.get("maxmarks")
-        percentage = req.POST.get("percentage")
-        grade = req.POST.get("grade")
-        context = {
-            "Roll No": rollno,
-            "Name": name,
-            "Hindi": hindi,
-            "Gujarati": gujarati,
-            "SS": ss,
-            "Total": total,
-            "min marks": minmarks,
-            "max marks": maxmarks,
-            "Percentage": percentage,
-            "Grade": grade
-        }
-        return render(req, "pages.html",context)
+        Rollno = req.POST.get("rno")
+        Name = req.POST.get("name")
+        Hindi = req.POST.get("hindi")
+        Gujarati = req.POST.get("gujarati")
+        SS = req.POST.get("ss")
+        Total = req.POST.get("total")
+        Min_marks = req.POST.get("min_marks")
+        Max_marks = req.POST.get("max_marks")
+        # Percentage = req.POST.get("percentage")
+        Grade = req.POST.get("grade")
+         
+        if Total:
+            try:
+                percentage = round(int(Total) / 300 * 100,2)
+            except ZeroDivisionError:
+                percentage = 0
 
+        print("rno:",Rollno,"name:",Name,"hindi:",Hindi,"gujarati:",Gujarati,"ss:",SS,"total:",Total,"min_marks:",Min_marks,"max_marks:",Max_marks,"percentage:",percentage,"grade:",Grade)
+    
     return render(req, "pages.html")
