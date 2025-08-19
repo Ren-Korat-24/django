@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traveler</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">Traveler</div>
+    <nav>
+      <a href="#">Features</a>
+      <a href="#">How it works</a>
+      <a href="#">Prices</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>See the world like a local</h1>
+      <p>Find a local guide consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Destination">
+        <input type="text" placeholder="mm/dd/yyyy">
+        <input type="text" placeholder="Group size">
+        <button>🔍</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="feature">
+      <h3>👍 Hand Picked Guides</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    <div class="feature">
+      <h3>🎧 24/7 Support</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    <div class="feature">
+      <h3>👤 Private Tours</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+  </section>
+
+</body>
+</html>

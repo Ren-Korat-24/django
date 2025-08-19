@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete</title>
+</head>
+<body>
+    <table border="2">
+        {% csrf_token %}
+        <tr>
+            <td>Id</td>
+            <td>Roll no</td>
+            <td>Name</td>
+            <td>Hindi</td>
+            <td>Gujarati</td>
+            <td>SS</td>
+            <td>Total</td>
+            <td>Minmarks</td>
+            <td>Maxmarks</td>
+            <td>Percentage</td>
+            <td>Grade</td>
+            <td colspan="2" align="center">Action</td>
+        </tr>
+            {%for info in data%}
+            <tr>
+                <td>{{info.id}}</td>
+                <td>{{info.rollno}}</td>
+                <td>{{info.name}}</td>
+                <td>{{info.hindi}}</td>
+                <td>{{info.gujarati}}</td>
+                <td>{{info.ss}}</td>
+                <td>{{info.total}}</td>
+                <td>{{info.min_marks}}</td>
+                <td>{{info.max_marks}}</td>
+                <td>{{info.percentage}}</td>
+                <td>{{info.grade}}</td>
+                {% comment %} <td><a href="{% url "delete" info.id %}">Delete</a></td> {% endcomment %}
+                <td><a href="/delete/{{info.id}}">Delete</a></td>
+                <td><a href="/edit/{{info.rollno}}">Edit</a></td>
+                {% comment %} <td><a href="{% url 'edit' info.rollno %}">Edit</a></td> {% endcomment %}
+            </tr>
+            {% endfor %}
+    </table>
+</body>
+</html>
