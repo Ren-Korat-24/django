@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from yomapp.models import Homedata
 
 # Create your views here.
@@ -55,14 +55,15 @@ def deletedata(req,id):
     return redirect("/show")
     # return render(req,"showdata.html")
 
-def editdata(req,rollno):
-    data1=Homedata.objects.get(rollno=rollno)
-    data1.save()
-    return render(req,"showdata.html")
-    # return redirect("/show")
+# def editdata(req,rollno):
+#     data1=Homedata.objects.get(rollno=rollno)
+#     data1.save()
+#     return render(req,"showdata.html")
+#     # return redirect("/show")
 
-def updatedata(req,rollno):
-    Homedata.objects.filter(rollno=rollno)
+def editdata(req,id):
+    student = get_object_or_404(Homedata,id=id)   
+
     if "submit" in req.POST:
         rollno=req.POST['rno']
         name=req.POST['name']
@@ -80,18 +81,23 @@ def updatedata(req,rollno):
                 percentage = round(int(total) / 300 * 100,2)
             except ZeroDivisionError:
                 percentage = 0
+
+        # print("rno:",Rollno,"name:",Name,"hindi:",Hindi,"gujarati:",Gujarati,"ss:",SS,"total:",Total,"min_marks:",Min_marks,"max_marks:",Max_marks,"percentage:",Percentage,"grade:",Grade)
+        
         data = Homedata(
-            rollno=rollno,
-            name=name,
-            hindi=hindi,
-            gujarati=gujarati,
-            ss=ss,
-            total=total,
-            min_marks=min_marks,
-            max_marks=max_marks,
-            percentage=percentage,
-            grade=grade
+        rollno=rollno,
+        name=name,
+        hindi=hindi,
+        gujarati=gujarati,
+        ss=ss,
+        total=total,
+        min_marks=min_marks,
+        max_marks=max_marks,
+        percentage=percentage,
+        grade=grade
         )
 
         data.save()
-    return redirect("/show")
+        print("Data Inserted..")
+        return redirect("/show")
+    return render(req,"showdata.html",{"student":student})

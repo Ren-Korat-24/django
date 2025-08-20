@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Homedata(models.Model):
-    rollno =models.IntegerField(default='')
+    rollno =models.IntegerField(unique=True)
     name = models.CharField(max_length=50,default='')
     hindi =models.IntegerField(max_length=3,default='')
     gujarati =models.IntegerField(max_length=3,default='')

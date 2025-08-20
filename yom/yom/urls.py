@@ -25,6 +25,6 @@ urlpatterns = [
     path('pages/',views.pages_html,name="/pages"),
     path('show/',views.showdata,name="/show"),
     path('delete/<int:id>/',views.deletedata,name="delete"),
-    path('edit/<int:rollno>/',views.editdata,name="edit"),
+    path('edit/<int:id>/',views.editdata,name="edit")
     # path('update/<int:id>/', views.updatedata, name="update")
 ]

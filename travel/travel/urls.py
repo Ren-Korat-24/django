@@ -21,5 +21,8 @@ from travelling import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.html),
-    path('home/',views.home_html,name="/home")
+    path('home/',views.home_html,name="/home"),
+    path('show/',views.showdata,name="/show"),
+    path('delete/<int:id>/',views.deletedata,name="delete"),
+    path('edit/<int:id>/',views.editdata,name="edit")
 ]

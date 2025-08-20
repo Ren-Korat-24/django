@@ -37,7 +37,7 @@
                 <td>{{info.grade}}</td>
                 {% comment %} <td><a href="{% url "delete" info.id %}">Delete</a></td> {% endcomment %}
                 <td><a href="/delete/{{info.id}}">Delete</a></td>
-                <td><a href="/edit/{{info.rollno}}">Edit</a></td>
+                <td><a href="/edit/{{info.id}}">Edit</a></td>
                 {% comment %} <td><a href="{% url 'edit' info.rollno %}">Edit</a></td> {% endcomment %}
             </tr>
             {% endfor %}
