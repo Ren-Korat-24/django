@@ -62,42 +62,41 @@ def deletedata(req,id):
 #     # return redirect("/show")
 
 def editdata(req,id):
-    student = get_object_or_404(Homedata,id=id)   
-
+    studentdata =Homedata.objects.get(id=id) 
     if "submit" in req.POST:
-        rollno=req.POST['rno']
-        name=req.POST['name']
-        hindi=req.POST['hindi']
-        gujarati=req.POST['gujarati']
-        ss=req.POST['ss']
-        total=req.POST['total']
-        min_marks=req.POST['min_marks']
-        max_marks=req.POST['max_marks']
+        studentdata.rollno=req.POST['rno']
+        studentdata.name=req.POST['name']
+        studentdata.hindi=req.POST['hindi']
+        studentdata.gujarati=req.POST['gujarati']
+        studentdata.ss=req.POST['ss']
+        studentdata.total=req.POST['total']
+        studentdata.min_marks=req.POST['min_marks']
+        studentdata.max_marks=req.POST['max_marks']
         # percentage=req.POST['percentage']
-        grade=req.POST['grade']
+        studentdata.grade=req.POST['grade']
          
-        if total:
+        if studentdata.total:
             try:
-                percentage = round(int(total) / 300 * 100,2)
+                studentdata.percentage = round(int(studentdata.total) / 300 * 100,2)
             except ZeroDivisionError:
-                percentage = 0
+                studentdata.percentage = 0
 
         # print("rno:",Rollno,"name:",Name,"hindi:",Hindi,"gujarati:",Gujarati,"ss:",SS,"total:",Total,"min_marks:",Min_marks,"max_marks:",Max_marks,"percentage:",Percentage,"grade:",Grade)
         
-        data = Homedata(
-        rollno=rollno,
-        name=name,
-        hindi=hindi,
-        gujarati=gujarati,
-        ss=ss,
-        total=total,
-        min_marks=min_marks,
-        max_marks=max_marks,
-        percentage=percentage,
-        grade=grade
-        )
+        # data = Homedata(
+        # rollno=rollno,
+        # name=name,
+        # hindi=hindi,
+        # gujarati=gujarati,
+        # ss=ss,
+        # total=total,
+        # min_marks=min_marks,
+        # max_marks=max_marks,
+        # percentage=percentage,
+        # grade=grade
+        # )
 
-        data.save()
-        print("Data Inserted..")
+        studentdata.save()
+        print("Data Updated..")
         return redirect("/show")
-    return render(req,"showdata.html",{"student":student})
+    return render(req,"pages.html",{"Student Data":studentdata})

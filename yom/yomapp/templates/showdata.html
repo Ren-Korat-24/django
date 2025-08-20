@@ -36,8 +36,8 @@
                 <td>{{info.percentage}}</td>
                 <td>{{info.grade}}</td>
                 {% comment %} <td><a href="{% url "delete" info.id %}">Delete</a></td> {% endcomment %}
-                <td><a href="/delete/{{info.id}}">Delete</a></td>
-                <td><a href="/edit/{{info.id}}">Edit</a></td>
+                <td><button><a href="/delete/{{info.id}}">Delete</a></button>   </td>
+                <td><button><a href="/edit/{{info.id}}">Edit</a></button></td>
                 {% comment %} <td><a href="{% url 'edit' info.rollno %}">Edit</a></td> {% endcomment %}
             </tr>
             {% endfor %}
