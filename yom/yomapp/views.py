@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404,HttpResponse
 from yomapp.models import Homedata
 
 # Create your views here.
@@ -6,7 +6,7 @@ def yom_html(req):
     return render(req, "yom.html")
 
 def home_html(req):
-    return render(req, "home.html")
+    return render(req, "yom.html")
 
 def pages_html(req):
     if "submit" in req.POST:
@@ -26,8 +26,6 @@ def pages_html(req):
                 percentage = round(int(total) / 300 * 100,2)
             except ZeroDivisionError:
                 percentage = 0
-
-        # print("rno:",Rollno,"name:",Name,"hindi:",Hindi,"gujarati:",Gujarati,"ss:",SS,"total:",Total,"min_marks:",Min_marks,"max_marks:",Max_marks,"percentage:",Percentage,"grade:",Grade)
         
         data = Homedata(
             rollno=rollno,
@@ -55,12 +53,6 @@ def deletedata(req,id):
     return redirect("/show")
     # return render(req,"showdata.html")
 
-# def editdata(req,rollno):
-#     data1=Homedata.objects.get(rollno=rollno)
-#     data1.save()
-#     return render(req,"showdata.html")
-#     # return redirect("/show")
-
 def editdata(req,id):
     studentdata =Homedata.objects.get(id=id) 
     if "submit" in req.POST:
@@ -80,21 +72,6 @@ def editdata(req,id):
                 studentdata.percentage = round(int(studentdata.total) / 300 * 100,2)
             except ZeroDivisionError:
                 studentdata.percentage = 0
-
-        # print("rno:",Rollno,"name:",Name,"hindi:",Hindi,"gujarati:",Gujarati,"ss:",SS,"total:",Total,"min_marks:",Min_marks,"max_marks:",Max_marks,"percentage:",Percentage,"grade:",Grade)
-        
-        # data = Homedata(
-        # rollno=rollno,
-        # name=name,
-        # hindi=hindi,
-        # gujarati=gujarati,
-        # ss=ss,
-        # total=total,
-        # min_marks=min_marks,
-        # max_marks=max_marks,
-        # percentage=percentage,
-        # grade=grade
-        # )
 
         studentdata.save()
         print("Data Updated..")
