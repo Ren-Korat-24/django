@@ -50,3 +50,6 @@ def index_page(req):
 def logout_page(req):
     if req.method == "POST":
         return redirect('login')
+
+# def dashbaord_page(req):
+#     return render (req, 'dashboard.html')
