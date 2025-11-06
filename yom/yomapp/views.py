@@ -64,7 +64,6 @@ def editdata(req,id):
         studentdata.total=req.POST['total']
         studentdata.min_marks=req.POST['min_marks']
         studentdata.max_marks=req.POST['max_marks']
-        # percentage=req.POST['percentage']
         studentdata.grade=req.POST['grade']
          
         if studentdata.total:
@@ -77,3 +76,28 @@ def editdata(req,id):
         print("Data Updated..")
         return redirect("/show")
     return render(req,"pages.html",{"Student Data":studentdata})
+
+def updatedata(req,id): 
+    studentdata =Homedata.objects.get(id=id) 
+    if "submit" in req.POST:
+        studentdata.rollno=req.POST['rno']
+        studentdata.name=req.POST['name']
+        studentdata.hindi=req.POST['hindi']
+        studentdata.gujarati=req.POST['gujarati']
+        studentdata.ss=req.POST['ss']
+        studentdata.total=req.POST['total']
+        studentdata.min_marks=req.POST['min_marks']
+        studentdata.max_marks=req.POST['max_marks']
+        # percentage=req.POST['percentage']
+        studentdata.grade=req.POST['grade']
+         
+        if studentdata.total:
+            try:
+                studentdata.percentage = round(int(studentdata.total) / 300 * 100,2)
+            except ZeroDivisionError:
+                studentdata.percentage = 0
+
+        studentdata.save()
+        print("Data Updated..")
+        return redirect("/update")
+    return render(req,"form.html",{"Student Data":studentdata})

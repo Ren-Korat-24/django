@@ -1,5 +1,5 @@
 """
-URL configuration for yom project.
+URL configuration for mysite project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
@@ -16,15 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from yomapp import views
+from mysiteapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.yom_html ),
-    path('home/',views.home_html,name="/home"),
-    path('pages/',views.pages_html,name="/pages"),
-    path('show/',views.showdata,name="/show"),
-    path('delete/<int:id>/',views.deletedata,name="delete"),
-    path('edit/<int:id>/',views.editdata,name="edit"),
-    path('update/<int:id>/', views.updatedata, name="update")
+    path('', views.index_page),
+    path('login/', views.index_page,name='login'),
+    path('register/', views.form_page,name='register'),
+    path('logout/', views.logout_page,name='logout')
 ]
