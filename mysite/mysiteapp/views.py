@@ -1,7 +1,8 @@
 # Create your views here.
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Register
-   
+from django.db.models import Q
+from django.core.paginator import Paginator
 
 def form_page(req):
     if req.method == "POST":
@@ -51,5 +52,72 @@ def logout_page(req):
     if req.method == "POST":
         return redirect('login')
 
-# def dashbaord_page(req):
-#     return render (req, 'dashboard.html')
+def dashboard_page(req):
+    return render(req,"dashboard.html")
+
+def users_page(req):
+    if "submit" in req.POST:
+        search_query = req.GET.get("search")
+        data = Register.objects.filter(new_collection=search_query).values()
+        return render(req, "users.html",{"data":data})    
+
+    data = Register.objects.all()
+    paginator = Paginator(data,10)  # Show 25 contacts per page.
+
+    page_number = req.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(req, "users.html", {"page_obj": page_obj})   # fetch all users from DB
+
+def delete_data(req,id):
+    Register.objects.filter(id=id).delete()
+    return redirect("/users")
+
+def edit_data(req, id):
+    user = Register.objects.get(id=id)
+
+    if "submit" in req.POST:
+        user.name = req.POST.get('name')
+        user.email = req.POST.get('email')
+        user.contact = req.POST.get('contact')
+        user.password = req.POST.get('password')
+        user.save()
+        print("User  Data  Updated..")
+        return redirect('users')
+
+    return render(req, "form.html", {"user": user})
+
+def search_data(req):
+        search_query = req.GET.get("search")
+        results = []
+        if search_query:
+            data = Register.objects.filter(
+                Q(name_icontains=search_query) | Q(contact_icontains=search_query)
+            ).distinct() # Use distinct() to avoid duplicate results if multiple fields match
+            return render(req, 'users.html', {"data":data, 'search_query': search_query})
+        else:
+            data = Register.objects.all()
+        
+        paginator = Paginator(data, 10)  # Show 25 contacts per page.
+
+        page_number = req.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        # return render(req, "users.html", {"page_obj": page_obj}) 
+
+def navigation_bar(req):
+    return render(req,"nav.html")
+
+def footer_bar(req):
+    return render(req,"footer.html")
+
+def blogs_page(req):
+    if "submit" in req.POST:
+        search_query = req.GET.get("search")
+        data = Register.objects.filter(new_collection=search_query).values()
+        return render(req, "blogs.html",{"data":data})    
+
+    data = Register.objects.all()
+    paginator = Paginator(data, 2)  # Show 25 contacts per page.
+
+    page_number = req.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(req, "blogs.html", {"page_obj": page_obj}) 
