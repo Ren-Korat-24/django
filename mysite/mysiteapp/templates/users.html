@@ -31,11 +31,9 @@
       {% if data %}
         <ul>
             {% for user in results %}
-                <li>{{ user.contact }} - {{ user.name }}</li>
+                <li>{{ user.contact }} - {{ user.name }} - {{ user.email }} - {{ user.password }}</li>
             {% endfor %}
         </ul>
-      {% else %}
-        <p>No results found.</p>
       {% endif %}
       
     </form>
