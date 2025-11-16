@@ -26,5 +26,5 @@ urlpatterns = [
     path('show/',views.showdata,name="/show"),
     path('delete/<int:id>/',views.deletedata,name="delete"),
     path('edit/<int:id>/',views.editdata,name="edit"),
-    path('update/<int:id>/', views.updatedata, name="update")
+    path('search/',views.searchdata,name="search"), 
 ]

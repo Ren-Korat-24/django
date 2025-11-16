@@ -143,3 +143,6 @@ def home_page(req):
         return render(req, "index.html", {"msg": "Wrong password!"})
 
     return render(req, "home.html")
+
+def contact_page(req):
+    return render(req, "contact.html")  

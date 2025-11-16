@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404,HttpResponse
 from yomapp.models import Homedata
+from django.core.paginator import Paginator
+from django.shortcuts import render
 
 # Create your views here.
 def yom_html(req):
@@ -45,8 +47,18 @@ def pages_html(req):
     return render(req, "pages.html")
 
 def showdata(req):
+    if "submit  " in req.POST:
+        search_query = req.GET.get("search")
+        data = Homedata.objects.filter(new_collection=search_query).values()
+        return render(req, "showdata.html",{"data":data})    
+
     data = Homedata.objects.all().values()
-    return render(req,"showdata.html",{"data":data})
+    paginator = Paginator(data, 3)  # Show 10 posts per page.
+    
+    page_number = req.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+   
+    return render(req,"showdata.html",{"page_obj":page_obj})
 
 def deletedata(req,id):
     Homedata.objects.filter(id=id).delete()
@@ -77,27 +89,19 @@ def editdata(req,id):
         return redirect("/show")
     return render(req,"pages.html",{"Student Data":studentdata})
 
-def updatedata(req,id): 
-    studentdata =Homedata.objects.get(id=id) 
-    if "submit" in req.POST:
-        studentdata.rollno=req.POST['rno']
-        studentdata.name=req.POST['name']
-        studentdata.hindi=req.POST['hindi']
-        studentdata.gujarati=req.POST['gujarati']
-        studentdata.ss=req.POST['ss']
-        studentdata.total=req.POST['total']
-        studentdata.min_marks=req.POST['min_marks']
-        studentdata.max_marks=req.POST['max_marks']
-        # percentage=req.POST['percentage']
-        studentdata.grade=req.POST['grade']
-         
-        if studentdata.total:
-            try:
-                studentdata.percentage = round(int(studentdata.total) / 300 * 100,2)
-            except ZeroDivisionError:
-                studentdata.percentage = 0
+def searchdata(req):
+    query = req.GET.get("query")
+    
+    if query:
+        print("Search Query:", query)
+        data = Homedata.objects.filter(name__icontains=query)
+        print("Filtered Data:", data)
+    else:
+        data = Homedata.objects.all()
 
-        studentdata.save()
-        print("Data Updated..")
-        return redirect("/update")
-    return render(req,"form.html",{"Student Data":studentdata})
+    paginator = Paginator(data, 3)
+    page_number = req.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(req, "showdata.html", {"page_obj": page_obj, "query": query})
+

@@ -1,99 +1,190 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Page</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>My Simple Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* FIX BLANK SPACING ISSUE */
+        body {
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .page-wrapper {
+            min-height: auto;
+            padding-bottom: 30px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .hero {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            text-align: center;
+        }
+        .content-wrapper {
+          
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .post {
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+        .post:hover { transform: scale(1.01); }
+
+        .post img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 15px 20px;
+        }
+
+        .post-content h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .meta {
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: #777;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-box {
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+        }
+
+        .sidebar-box h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        @media (max-width: 850px) {
+            .content-wrapper { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
-
 <body>
+
 {% include "nav.html" %}
-<body style="display:flex;flex-direction:column;min-height:100vh;">
-  <!-- ✅ Blogs -->
 
-<div class="row">
-  <div class="col-4">
-    <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
-      <nav class="nav nav-pills flex-column">
-        <a class="nav-link" href="#item-1">Item 1</a>
-        <nav class="nav nav-pills flex-column">
-          <a class="nav-link ms-3 my-1" href="#item-1-1">Item 1-1</a>
-          <a class="nav-link ms-3 my-1" href="#item-1-2">Item 1-2</a>
-        </nav>
-        <a class="nav-link" href="#item-2">Item 2</a>
-        <a class="nav-link" href="#item-3">Item 3</a>
-        <nav class="nav nav-pills flex-column">
-          <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
-          <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
-        </nav>
-      </nav>
-    </nav>
-  </div>
+<div class="page-wrapper">
 
-  <div class="col-8">
-    <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
-      <div id="item-1">
-        <h4>Item 1</h4>
-        <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.<br>
+<div class="container">
 
-Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p>
-      </div>
-      <div id="item-1-1">
-        <h5>Item 1-1</h5>
-        <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.<br>
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Welcome to My Blog</h1>
+        <p>I share thoughts about web development, technology, and productivity.</p>
+    </section>
 
-Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues</p>
-      </div>
-      <div id="item-1-2">
-        <h5>Item 1-2</h5>
-        <p><p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.<br>
+    <!-- BLOG + SIDEBAR -->
+    <div class="content-wrapper">
 
-Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p></p>
-      </div>
-      <div id="item-2">
-        <h4>Item 2</h4>
-        <p><p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.<br>
+        <!-- BLOG POSTS -->
+        <main>
 
-Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p></p>
-      </div>
-      <div id="item-3">
-        <h4>Item 3</h4>
-        <p><p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.<br>
+            <article class="post">
+                <img src="https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_1280.jpg" alt="">
+                <div class="post-content">
+                    <h2>Getting Started with HTML & CSS</h2>
+                    <div class="meta">15 November 2025 • Web Development</div>
+                    <p>Learn how to structure a simple web page and style it like a professional.</p>
+                    <a href="#">Read more →</a>
+                </div>
+            </article>
 
-Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p></p>
-      </div>
-      <div id="item-3-1">
-        <h5>Item 3-1</h5>
-        <p><p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.<br>
+            <article class="post">
+                <img src="https://cdn.pixabay.com/photo/2017/02/05/00/19/web-design-2038872_1280.jpg" alt="">
+                <div class="post-content">
+                    <h2>Why Clean Design Matters</h2>
+                    <div class="meta">10 November 2025 • Design</div>
+                    <p>Good layout = better readability and user experience. Design matters!</p>
+                    <a href="#">Read more →</a>
+                </div>
+            </article>
 
-Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p></p>
-      </div>
-      <div id="item-3-2">
-        <h5>Item 3-2</h5>
-        <p><p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It’s repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.<br>
+            <article class="post">
+                <img src="https://cdn.pixabay.com/photo/2024/06/14/12/15/developer-8829709_1280.jpg" alt="">
+                <div class="post-content">
+                    <h2>Productivity Tips for Developers</h2>
+                    <div class="meta">01 November 2025 • Productivity</div>
+                    <p>Learn time-blocking, avoiding distractions, and boosting efficiency.</p>
+                    <a href="#">Read more →</a>
+                </div>
+            </article>
 
-Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p></p>
-      </div>
+        </main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-box">
+                <h3>About Me</h3>
+                <p>Hi, I'm Roshan 👋 I write about coding and technology trends.</p>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>Categories</h3>
+                <ul>
+                    <li>Web Development</li>
+                    <li>Design</li>
+                    <li>Productivity</li>
+                    <li>Learning & Career</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>Recent Posts</h3>
+                <ul>
+                    <li>Getting Started with HTML & CSS</li>
+                    <li>Why Clean Design Matters</li>
+                    <li>Productivity Tips for Developers</li>
+                </ul>
+            </div>
+
+        </aside>
+
     </div>
-  </div>
-</div>
-  
-    <!-- ✅ Pagination -->
-    <div class="pagination d-flex justify-content-center">
-      {% if page_obj.has_previous %}
-        <a href="?page=1" class="btn btn-light btn-sm mx-1">First</a>
-        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-light btn-sm mx-1">Previous</a>
-      {% endif %}
 
-      <span class="mx-3">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+</div> <!-- END page-wrapper -->
 
-      {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-light btn-sm mx-1">Next</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-light btn-sm mx-1">Last</a>
-      {% endif %}
-    </div>
-    {% include 'footer.html' %}
+{% include "footer.html" %}
+
 </body>
 </html>

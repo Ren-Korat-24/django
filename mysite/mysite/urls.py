@@ -33,4 +33,5 @@ urlpatterns = [
     path('footer_bar/',views.footer_bar,name="footer_bar"),
     path('blogs/',views.blogs_page,name="blogs"),
     path('home/',views.home_page,name="home"),
+    path('contact/',views.contact_page,name="contact"),
 ]
